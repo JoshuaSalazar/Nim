@@ -1,0 +1,5 @@
+c:\users\jsalazar\documents\visual studio 2010\Projects\Nim\bin\Debug\Nim.exe
+c:\users\jsalazar\documents\visual studio 2010\Projects\Nim\bin\Debug\Nim.pdb
+c:\users\jsalazar\documents\visual studio 2010\Projects\Nim\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\jsalazar\documents\visual studio 2010\Projects\Nim\obj\x86\Debug\Nim.exe
+c:\users\jsalazar\documents\visual studio 2010\Projects\Nim\obj\x86\Debug\Nim.pdb
