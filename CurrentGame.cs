@@ -17,6 +17,7 @@ namespace Nim
             topRow = new List<int>();
             midRow = new List<int>();
             botRow = new List<int>();
+            values = new List<float>();
         }
         public void addState(int top, int mid, int bot)
         {
@@ -31,17 +32,13 @@ namespace Nim
             {
                 if ((i - totalStates) % 2 == 0)
                 {
-                    int dif = totalStates - i;
-                    dif -= dif % 2;
-                    float val = totalStates*(1 - dif)/(totalStates);
-                    values.Add(val);
+                    float value = -((totalStates - (totalStates - i) % 2)) / (float)totalStates;
+                    values.Add(value);
                 }
                 else
                 {
-                    int dif = totalStates - i;
-                    dif -= dif % 2;
-                    float val = -totalStates * (1 - dif) / (totalStates);
-                    values.Add(val);
+                    float value = ((totalStates - (totalStates - i) % 2)) / (float)totalStates;
+                    values.Add(value);
                 }
             }
         }

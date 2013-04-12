@@ -8,7 +8,6 @@ namespace Nim
     class GameManager
     {
         public List<State> stateHistory;
-        public int whoseTurn;
         public int[] rows;
         private CurrentGame game;
         private Random rand;
@@ -18,13 +17,27 @@ namespace Nim
             rand = new Random();
             game = new CurrentGame();
             stateHistory = new List<State>();
+            makeStates();
+        }
+        private void makeStates()
+        {
+            for (int t = 0; t < 4; t++)
+            {
+                for (int m = 0; m < 6; m++)
+                {
+                    for (int b = 0; b < 8; b++)
+                    {
+                        stateHistory.Add(new State(t, m, b, 0));
+                    }
+                }
+            }
         }
         public void printBoard()
         {
             Console.WriteLine("===========================");
-            Console.WriteLine(rows[0]);
-            Console.WriteLine(rows[1]);
-            Console.WriteLine(rows[2]);
+            Console.WriteLine("Row: 0 Pieces: " + rows[0]);
+            Console.WriteLine("Row: 1 Pieces: " + rows[1]);
+            Console.WriteLine("Row: 2 Pieces: " + rows[2]);
             Console.WriteLine("===========================");
         }
         public void newGame()
@@ -32,6 +45,7 @@ namespace Nim
             rows[0] = 3;
             rows[1] = 5;
             rows[2] = 7;
+            game = new CurrentGame();
         }
         public bool isGameOver()
         {
@@ -39,6 +53,7 @@ namespace Nim
                 rows[1] == 0 &&
                 rows[2] == 0)
             {
+                endGame();
                 newGame();
                 return true;
             }
@@ -76,17 +91,11 @@ namespace Nim
                         stateHistory[i].midRow == game.midRow[k] &&
                         stateHistory[i].botRow == game.botRow[k])
                     {
-                        //Got a match
                         stateHistory[i].sum += game.values[k];
                         stateHistory[i].num++;
                     }
-                    else
-                    {
-                        stateHistory.Add(new State(game.topRow[k], game.midRow[k], game.botRow[k], game.values[k]));
-                    }
                 }
             }
-            newGame();
         }
         public void computerMove()
         {
@@ -99,6 +108,7 @@ namespace Nim
                     stateHistory[i].botRow > rows[2])
                 {
                     //Can't be done
+                    //Console.WriteLine("Found state that can't be done");
                 }
                 else
                 {
@@ -117,14 +127,19 @@ namespace Nim
                     }
                     if (numRowsToMove == 1)
                     {
-                        if (stateHistory[i].sum / stateHistory[i].num >= stateHistory[bestMove].sum / stateHistory[bestMove].num)
+                        if (bestMove == -1)
                         {
                             bestMove = i;
+                        }
+                        else if (stateHistory[i].sum / stateHistory[i].num <= stateHistory[bestMove].sum / stateHistory[bestMove].num)
+                        {
+                            bestMove = i;
+                            //Console.WriteLine("Found a better move");
                         }
                     }
                 }
             }
-            if (bestMove != -1)
+            if (bestMove != -1 && stateHistory.Count > 0)
             {
                 rows[0] = stateHistory[bestMove].topRow;
                 rows[1] = stateHistory[bestMove].midRow;
@@ -139,11 +154,12 @@ namespace Nim
                 {
                     int randRow = rand.Next(3);
 
-                    if (rows[randRow] > 0){
-                        int numRemoved = rand.Next(rows[randRow]-1);
-                        rows[randRow] -= numRemoved+1;
+                    if (rows[randRow] > 0)
+                    {
+                        int numRemoved = rand.Next(rows[randRow] - 1);
+                        rows[randRow] -= numRemoved + 1;
                         hasMoved = true;
-                        Console.WriteLine("This is a random move, removing "+(numRemoved+1)+" pieces from row "+randRow);
+                        //Console.WriteLine("This is a random move, removing "+(numRemoved+1)+" pieces from row "+randRow);
                         moveMade();
                     }
                 }

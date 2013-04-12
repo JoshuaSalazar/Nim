@@ -14,7 +14,11 @@ namespace Nim
         public float sum;
         public State(int top, int mid, int bot, float val)
         {
-
+            topRow = top;
+            midRow = mid;
+            botRow = bot;
+            num = 1;
+            sum = val;
         }
     }
 }

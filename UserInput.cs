@@ -33,30 +33,65 @@ namespace Nim
         public void PlayerInput()
         {
             game.newGame();
+            Random randgen = new Random();
+            int rand = randgen.Next(0, 2);
+            bool isPlayerTurn = rand % 2 == 0;
 
             while (!game.isGameOver())
             {
+                if (isPlayerTurn)
+                {
+                    playerTurn();
+                }
+                else
+                {
+                    computerTurn();
+                }
+                isPlayerTurn = !isPlayerTurn;
+                if (game.isGameOver() && isPlayerTurn)
+                {
+                    Console.WriteLine("You win!");
+                }
+                else if (game.isGameOver())
+                {
+                    Console.WriteLine("You lose");
+                }
+            }
+        }
+
+        private void playerTurn()
+        {
+            bool moveMade = false;
+            while (!moveMade)
+            {
                 game.printBoard();
                 Console.WriteLine("Choose number of row");
-                Console.WriteLine("(1) for First Row, (2) for Second Row, (3) for Third Row");
+                Console.WriteLine("(0) for First Row, (1) for Second Row, (2) for Third Row");
                 string rowNumber = Console.ReadLine();
                 int row = int.Parse(rowNumber);
 
                 Console.WriteLine("How many pieces do you want to take away?");
                 string takePieces = Console.ReadLine();
                 int num = int.Parse(takePieces);
-
-                if (game.makeMove(row, num)){
-                    game.computerMove();
-                }else{
+                if (!game.makeMove(row, num))
+                {
                     Console.WriteLine("Invalid Input, try again");
+                }
+                else
+                {
+                    moveMade = true;
                 }
             }
         }
 
+        private void computerTurn()
+        {
+            game.computerMove();
+        }
+
         public void ComputerVsComputer()
         {
-            Console.WriteLine("How many types do the Computers play?");
+            Console.WriteLine("How many times do you want the Computers to play?");
             string numGames = Console.ReadLine();
 
             int num = int.Parse(numGames);
@@ -67,7 +102,7 @@ namespace Nim
                 {
                     game.computerMove();
                 }
-                Console.WriteLine("Game #"+i+" complete.");
+                //Console.WriteLine("Game #"+i+" complete.");
             }
         }
     }
