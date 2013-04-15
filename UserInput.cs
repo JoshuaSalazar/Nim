@@ -41,7 +41,7 @@ namespace Nim
             int rand = randgen.Next(0, 2);
             bool isPlayerTurn = rand % 2 == 0;
 
-            while (!game.isGameOver())
+            while (!game.gameIsOver())
             {
                 if (isPlayerTurn)
                 {
@@ -52,11 +52,11 @@ namespace Nim
                     computerTurn();
                 }
                 isPlayerTurn = !isPlayerTurn;
-                if (game.isGameOver() && isPlayerTurn)
+                if (game.gameIsOver() && isPlayerTurn)
                 {
                     Console.WriteLine("You win!");
                 }
-                else if (game.isGameOver())
+                else if (game.gameIsOver())
                 {
                     Console.WriteLine("You lose");
                 }
@@ -102,7 +102,7 @@ namespace Nim
             game.newGame();
             for (int i = 0; i < num; i++)
             {
-                while (!game.isGameOver())
+                while (!game.gameIsOver())
                 {
                     game.computerMove();
                 }

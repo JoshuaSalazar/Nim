@@ -7,27 +7,27 @@ namespace Nim
 {
     class GameManager
     {
-        public List<State> stateHistory;
+        public List<State> stateList;
         public int[] rows;
         private CurrentGame game;
         private Random rand;
-        public GameManager()
-        {
+
+        public GameManager(){
             rows = new int[3];
             rand = new Random();
             game = new CurrentGame();
-            stateHistory = new List<State>();
-            makeStates();
+            stateList = new List<State>();
+            initStateList();
         }
-        private void makeStates()
-        {
+
+        private void initStateList(){
             for (int t = 0; t < 4; t++)
             {
                 for (int m = 0; m < 6; m++)
                 {
                     for (int b = 0; b < 8; b++)
                     {
-                        stateHistory.Add(new State(t, m, b));
+                        stateList.Add(new State(t, m, b));
                     }
                 }
             }
@@ -47,7 +47,7 @@ namespace Nim
             rows[2] = 7;
             game = new CurrentGame();
         }
-        public bool isGameOver()
+        public bool gameIsOver()
         {
             if (rows[0] == 0 &&
                 rows[1] == 0 &&
@@ -85,14 +85,13 @@ namespace Nim
             game.calcValues();
             for (int k = 0; k < game.totalStates; k++)
             {
-                for (int i = 0; i < stateHistory.Count; i++)
+                for (int i = 0; i < stateList.Count; i++)
                 {
-                    if (stateHistory[i].topRow == game.topRow[k] &&
-                        stateHistory[i].midRow == game.midRow[k] &&
-                        stateHistory[i].botRow == game.botRow[k])
+                    if (stateList[i].TopRow == game.topRow[k] &&
+                        stateList[i].MidRow == game.midRow[k] &&
+                        stateList[i].BotRow == game.botRow[k])
                     {
-                        stateHistory[i].sum += game.values[k];
-                        stateHistory[i].num++;
+                        stateList[i].addInstance(game.values[k]);
                     }
                 }
             }
@@ -100,12 +99,12 @@ namespace Nim
         public void computerMove()
         {
             int bestMove = -1;
-            for (int i = 0; i < stateHistory.Count; i++)
+            for (int i = 0; i < stateList.Count; i++)
             {
                 //if it's possible to get there
-                if (stateHistory[i].topRow > rows[0] ||
-                    stateHistory[i].midRow > rows[1] ||
-                    stateHistory[i].botRow > rows[2])
+                if (stateList[i].TopRow > rows[0] ||
+                    stateList[i].MidRow > rows[1] ||
+                    stateList[i].BotRow > rows[2])
                 {
                     //Can't be done
                     //Console.WriteLine("Found state that can't be done");
@@ -113,15 +112,15 @@ namespace Nim
                 else
                 {
                     int numRowsToMove = 0;
-                    if (stateHistory[i].topRow < rows[0])
+                    if (stateList[i].TopRow < rows[0])
                     {
                         numRowsToMove++;
                     }
-                    if (stateHistory[i].midRow < rows[1])
+                    if (stateList[i].MidRow < rows[1])
                     {
                         numRowsToMove++;
                     }
-                    if (stateHistory[i].botRow < rows[2])
+                    if (stateList[i].BotRow < rows[2])
                     {
                         numRowsToMove++;
                     }
@@ -131,7 +130,7 @@ namespace Nim
                         {
                             bestMove = i;
                         }
-                        else if (stateHistory[i].sum / stateHistory[i].num <= stateHistory[bestMove].sum / stateHistory[bestMove].num)
+                        else if (stateList[i].getWeight() <= stateList[bestMove].getWeight())
                         {
                             bestMove = i;
                             //Console.WriteLine("Found a better move");
@@ -139,11 +138,11 @@ namespace Nim
                     }
                 }
             }
-            if (bestMove != -1 && stateHistory.Count > 0)
+            if (bestMove != -1 && stateList.Count > 0)
             {
-                rows[0] = stateHistory[bestMove].topRow;
-                rows[1] = stateHistory[bestMove].midRow;
-                rows[2] = stateHistory[bestMove].botRow;
+                rows[0] = stateList[bestMove].TopRow;
+                rows[1] = stateList[bestMove].MidRow;
+                rows[2] = stateList[bestMove].BotRow;
                 moveMade();
             }
             else
