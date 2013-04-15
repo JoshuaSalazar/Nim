@@ -27,7 +27,7 @@ namespace Nim
                 {
                     for (int b = 0; b < 8; b++)
                     {
-                        stateHistory.Add(new State(t, m, b, 0));
+                        stateHistory.Add(new State(t, m, b));
                     }
                 }
             }

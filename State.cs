@@ -7,18 +7,21 @@ namespace Nim
 {
     class State
     {
-        public int topRow;
-        public int midRow;
-        public int botRow;
-        public int num;
-        public float sum;
-        public State(int top, int mid, int bot, float val)
+        private int topRow;
+        private int midRow;
+        private int botRow;
+        private int num;
+        private float sum;
+        public State(int top, int mid, int bot)
         {
             topRow = top;
             midRow = mid;
             botRow = bot;
-            num = 1;
-            sum = val;
+            num = 0;
+        }
+        public void addInstance(float value){
+            num++;
+            sum += value;
         }
     }
 }

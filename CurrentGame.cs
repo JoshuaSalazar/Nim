@@ -12,6 +12,7 @@ namespace Nim
         public List<int> botRow;
         public int totalStates;
         public List<float> values;
+
         public CurrentGame()
         {
             topRow = new List<int>();
