@@ -8,6 +8,7 @@ namespace Nim
     public class UserInput
     {
         private GameManager game;
+        DateTime dt;
         public UserInput()
         {
             game = new GameManager();
@@ -24,7 +25,10 @@ namespace Nim
             }
             else if (selectMode == "2")
             {
+                dt = DateTime.Now;
                 ComputerVsComputer();
+                TimeSpan ts = DateTime.Now - dt;
+                Console.WriteLine(ts);
                 return true;
             }
             return false;

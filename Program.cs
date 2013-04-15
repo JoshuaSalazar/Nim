@@ -10,10 +10,7 @@ namespace Nim
         static void Main(string[] args)
         {
             UserInput game = new UserInput();
-            while (game.Begin())
-            {
-
-            }
+            game.Begin()
         }
     }
 }
