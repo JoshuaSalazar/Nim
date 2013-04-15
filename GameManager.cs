@@ -82,16 +82,15 @@ namespace Nim
         }
         public void endGame()
         {
-            game.calcValues();
-            for (int k = 0; k < game.totalStates; k++)
+            for (int k = 0; k < game.TotalStates; k++)
             {
                 for (int i = 0; i < stateList.Count; i++)
                 {
-                    if (stateList[i].TopRow == game.topRow[k] &&
-                        stateList[i].MidRow == game.midRow[k] &&
-                        stateList[i].BotRow == game.botRow[k])
+                    if (stateList[i].TopRow == game.TopRow[k] &&
+                        stateList[i].MidRow == game.MidRow[k] &&
+                        stateList[i].BotRow == game.BotRow[k])
                     {
-                        stateList[i].addInstance(game.values[k]);
+                        stateList[i].addInstance(game.Values[k]);
                     }
                 }
             }

@@ -7,40 +7,60 @@ namespace Nim
 {
     class CurrentGame
     {
-        public List<int> topRow;
-        public List<int> midRow;
-        public List<int> botRow;
-        public int totalStates;
-        public List<float> values;
+        private List<int> topRow;
+        private List<int> midRow;
+        private List<int> botRow;
+        private int totalStates;
+        private List<float> values;
 
-        public CurrentGame()
-        {
+        public CurrentGame(){
             topRow = new List<int>();
             midRow = new List<int>();
             botRow = new List<int>();
-            values = new List<float>();
         }
-        public void addState(int top, int mid, int bot)
-        {
+
+        public void addState(int top, int mid, int bot){
             topRow.Add(top);
             midRow.Add(mid);
             botRow.Add(bot);
             totalStates++;
         }
-        public void calcValues()
-        {
-            for (int i = 0; i < totalStates; i++)
-            {
-                if ((i - totalStates) % 2 == 0)
-                {
+
+        private void calcValues(){
+            values = new List<float>();
+            for (int i = 0; i < totalStates; i++){
+                if ((i - totalStates) % 2 == 0){
                     float value = -((totalStates - (totalStates - i) % 2)) / (float)totalStates;
                     values.Add(value);
-                }
-                else
-                {
+                }else{
                     float value = ((totalStates - (totalStates - i) % 2)) / (float)totalStates;
                     values.Add(value);
                 }
+            }
+        }
+
+        public List<int> TopRow{
+            get { return topRow; }
+        }
+
+        public List<int> MidRow{
+            get { return midRow; }
+        }
+
+        public List<int> BotRow{
+            get { return botRow; }
+        }
+
+        public int TotalStates{
+            get { return totalStates; }
+        }
+
+        public List<float> Values{
+            get {
+                if (values.Count < topRow.Count){
+                    calcValues();
+                }
+                return values; 
             }
         }
     }
