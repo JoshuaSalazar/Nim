@@ -37,16 +37,18 @@ namespace Nim
                 }
                 else
                 {
-                    quit = false;
+                    quit = true;
                 }
 
-            } while (quit);
+            } while (!quit);
 
             return false;
         }
 
         public void PlayerInput()
         {
+            HumanPlayer p1 = new HumanPlayer();
+            ComputerPlayer p2 = new ComputerPlayer();
             game.newGame();
             Random randgen = new Random();
             int rand = randgen.Next(0, 2);
@@ -56,11 +58,11 @@ namespace Nim
             {
                 if (isPlayerTurn)
                 {
-                    playerTurn();
+                    p1.makeMove(game);
                 }
                 else
                 {
-                    computerTurn();
+                    p2.makeMove(game);
                 }
                 isPlayerTurn = !isPlayerTurn;
                 if (game.gameIsOver() && isPlayerTurn)
@@ -99,13 +101,9 @@ namespace Nim
             }
         }
 
-        private void computerTurn()
-        {
-            game.computerMove();
-        }
-
         public void ComputerVsComputer()
         {
+            ComputerPlayer cpu = new ComputerPlayer();
             Console.WriteLine("How many times do you want the Computers to play?");
             string numGames = Console.ReadLine();
 
@@ -115,9 +113,9 @@ namespace Nim
             {
                 while (!game.gameIsOver())
                 {
-                    game.computerMove();
+                    cpu.makeMove(game);
                 }
-                //Console.WriteLine("Game #"+i+" complete.");
+                game.newGame();
             }
         }
     }

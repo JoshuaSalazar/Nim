@@ -17,6 +17,7 @@ namespace Nim
             topRow = new List<int>();
             midRow = new List<int>();
             botRow = new List<int>();
+            values = new List<float>();
         }
 
         public void addState(int top, int mid, int bot){
@@ -27,7 +28,6 @@ namespace Nim
         }
 
         private void calcValues(){
-            values = new List<float>();
             for (int i = 0; i < totalStates; i++){
                 if ((i - totalStates) % 2 == 0){
                     float value = -((totalStates - (totalStates - i) % 2)) / (float)totalStates;

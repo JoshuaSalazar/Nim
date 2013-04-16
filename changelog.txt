@@ -230,4 +230,4 @@ Change 4:
     }
 	
 Change 5:
-	Extracted classes for Players, known as HumanPlayer and ComputerPlayer. 
+	Extracted classes for Players, known as HumanPlayer and ComputerPlayer. This improves cohesion. Also extracted an interface from the two of them called IPlayer. 

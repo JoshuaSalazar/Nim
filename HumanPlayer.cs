@@ -7,9 +7,7 @@ namespace Nim
 {
     class HumanPlayer : IPlayer
     {
-        private String _name;
-        public HumanPlayer(String name){
-            _name = name;
+        public HumanPlayer(){
         }
         public bool makeMove(GameManager game)
         {
