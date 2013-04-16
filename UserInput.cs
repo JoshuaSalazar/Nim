@@ -13,24 +13,35 @@ namespace Nim
         {
             game = new GameManager();
         }
+
         public bool Begin()
         {
-            Console.WriteLine("Choose:  (1) for Player vs Computer or (2) for Computer vs Computer");
-            string selectMode = Console.ReadLine();
+            bool quit = false;
+            do
+            {
+                Console.WriteLine("Choose:  (1) for Player vs Computer or (2) for Computer vs Computer");
+                string selectMode = Console.ReadLine();
 
-            if (selectMode == "1")
-            {
-                PlayerInput();
-                return true;
-            }
-            else if (selectMode == "2")
-            {
-                dt = DateTime.Now;
-                ComputerVsComputer();
-                TimeSpan ts = DateTime.Now - dt;
-                Console.WriteLine(ts);
-                return true;
-            }
+                if (selectMode == "1")
+                {
+                    PlayerInput();
+
+                }
+                else if (selectMode == "2")
+                {
+                    dt = DateTime.Now;
+                    ComputerVsComputer();
+                    TimeSpan ts = DateTime.Now - dt;
+                    Console.WriteLine(ts);
+
+                }
+                else
+                {
+                    quit = false;
+                }
+
+            } while (quit);
+
             return false;
         }
 

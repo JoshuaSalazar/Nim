@@ -59,6 +59,7 @@ namespace Nim
             }
             return false;
         }
+
         public bool makeMove(int row, int num)
         {
             if (row >= rows.Length)
