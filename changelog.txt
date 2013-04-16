@@ -1,0 +1,123 @@
+Change 1:
+	while (game.Begin())
+	{
+
+	}
+
+	Simplifying it, the wile loop didn't make sense
+
+	game.Begin();
+
+Change 2:
+	class State
+    {
+        public int topRow;
+        public int midRow;
+        public int botRow;
+        public int num;
+        public float sum;
+        public State(int top, int mid, int bot, float val)
+        {
+            topRow = top;
+            midRow = mid;
+            botRow = bot;
+            num = 1;
+            sum = val;
+        }
+    }
+	
+	Moved repeated logic to State and tightened encapsulation. Also simplified constructor and changed calls to the constructor to comply.
+	
+	class State
+    {
+        private int topRow;
+        private int midRow;
+        private int botRow;
+        private int num;
+        private float sum;
+        public State(int top, int mid, int bot)
+        {
+            topRow = top;
+            midRow = mid;
+            botRow = bot;
+            num = 0;
+        }
+        public void addInstance(float value){
+            num++;
+            sum += value;
+        }
+    }
+	
+Change 3:
+	Class State:
+		class State
+		{
+			private int topRow;
+			private int midRow;
+			private int botRow;
+			private int num;
+			private float sum;
+			public State(int top, int mid, int bot)
+			{
+				topRow = top;
+				midRow = mid;
+				botRow = bot;
+				num = 0;
+			}
+			public void addInstance(float value){
+				num++;
+				sum += value;
+			}
+		}
+		
+		Encapsulated fields, moved weight calculation to State
+		
+		class State
+		{
+			private int topRow;
+			private int midRow;
+			private int botRow;
+			private int num;
+			private float sum;
+
+			public State(int top, int mid, int bot){
+				topRow = top;
+				midRow = mid;
+				botRow = bot;
+				num = 0;
+			}
+
+			public void addInstance(float value){
+				num++;
+				sum += value;
+			}
+
+			public int TopRow{
+				get { return topRow; }
+			}
+			public int MidRow{
+				get { return midRow; }
+			}
+			public int BotRow{
+				get { return botRow; }
+			}
+			public float getWeight(){
+				return sum / (float)num;
+			}
+		}
+	Class GameManager:
+		public List<State> stateHistory;
+		
+		stateHistory = new List<State>();
+		makeStates();
+		
+		private void makeStates()
+		{
+		
+		stateHistory.Add(new State(t, m, b));
+		
+		public bool isGameOver()
+		
+		for (int i = 0; i < stateHistory.Count; i++)
+		
+		
