@@ -108,16 +108,125 @@ Change 3:
 	Class GameManager:
 		public List<State> stateHistory;
 		
-		stateHistory = new List<State>();
-		makeStates();
-		
 		private void makeStates()
 		{
 		
-		stateHistory.Add(new State(t, m, b));
-		
 		public bool isGameOver()
 		
-		for (int i = 0; i < stateHistory.Count; i++)
-		
-		
+		 else if (stateHistory[i].sum / stateHistory[i].num <= stateHistory[bestMove].sum / stateHistory[bestMove].num)
+		 
+		 Renamed a lot of things to make more sense. Originally, we had a history of found states, but then switched to a list of all possible states. Renamed stuff to comply. Fixed bunches of things to comply with changes in State.
+		 
+		 public List<State> stateList;
+		 
+		 private void initStateList(){
+		 
+		 public bool gameIsOver()
+		 
+		 else if (stateList[i].getWeight() <= stateList[bestMove].getWeight())
+		 
+Change 4:
+	class CurrentGame
+	{
+		public List<int> topRow;
+		public List<int> midRow;
+		public List<int> botRow;
+		public int totalStates;
+		public List<float> values;
+
+		public CurrentGame()
+		{
+			topRow = new List<int>();
+			midRow = new List<int>();
+			botRow = new List<int>();
+			values = new List<float>();
+		}
+		public void addState(int top, int mid, int bot)
+		{
+			topRow.Add(top);
+			midRow.Add(mid);
+			botRow.Add(bot);
+			totalStates++;
+		}
+		public void calcValues()
+		{
+			for (int i = 0; i < totalStates; i++)
+			{
+				if ((i - totalStates) % 2 == 0)
+				{
+					float value = -((totalStates - (totalStates - i) % 2)) / (float)totalStates;
+					values.Add(value);
+				}
+				else
+				{
+					float value = ((totalStates - (totalStates - i) % 2)) / (float)totalStates;
+					values.Add(value);
+				}
+			}
+		}
+	}
+	
+	Encapsulated fields. Moved the calcValues call to the values getter, so users of CurrentGame don't need to call calcValues themselves. Also fixed GameManager to reflect such changes.
+	
+	class CurrentGame
+    {
+        private List<int> topRow;
+        private List<int> midRow;
+        private List<int> botRow;
+        private int totalStates;
+        private List<float> values;
+
+        public CurrentGame(){
+            topRow = new List<int>();
+            midRow = new List<int>();
+            botRow = new List<int>();
+        }
+
+        public void addState(int top, int mid, int bot){
+            topRow.Add(top);
+            midRow.Add(mid);
+            botRow.Add(bot);
+            totalStates++;
+        }
+
+        private void calcValues(){
+            values = new List<float>();
+            for (int i = 0; i < totalStates; i++){
+                if ((i - totalStates) % 2 == 0){
+                    float value = -((totalStates - (totalStates - i) % 2)) / (float)totalStates;
+                    values.Add(value);
+                }else{
+                    float value = ((totalStates - (totalStates - i) % 2)) / (float)totalStates;
+                    values.Add(value);
+                }
+            }
+        }
+
+        public List<int> TopRow{
+            get { return topRow; }
+        }
+
+        public List<int> MidRow{
+            get { return midRow; }
+        }
+
+        public List<int> BotRow{
+            get { return botRow; }
+        }
+
+        public int TotalStates{
+            get { return totalStates; }
+        }
+
+        public List<float> Values{
+            get {
+                if (values.Count < topRow.Count){
+                    calcValues();
+                }
+                return values; 
+            }
+        }
+    }
+	
+Change 5:
+	Extracted classes for Players, known as HumanPlayer and ComputerPlayer. 
