@@ -46,15 +46,15 @@ namespace Nim
                 int botDiff = game.rows[2] - game.stateList[bestMove].BotRow;
                 if (topDiff != 0){
                     game.makeMove(0, topDiff);
-                    Console.WriteLine("Computer removed " + topDiff + " pieces from row: 0");
+                    //Console.WriteLine("Computer removed " + topDiff + " pieces from row: 0");
                 } else if (midDiff != 0){
                     game.makeMove(1, midDiff);
-                    Console.WriteLine("Computer removed " + midDiff + " pieces from row: 1");
+                    //Console.WriteLine("Computer removed " + midDiff + " pieces from row: 1");
                 }
                 else if (botDiff != 0)
                 {
                     game.makeMove(2, botDiff);
-                    Console.WriteLine("Computer removed " + botDiff + " pieces from row: 2");
+                    //Console.WriteLine("Computer removed " + botDiff + " pieces from row: 2");
                 }
             }else{
                 bool hasMoved = false;
