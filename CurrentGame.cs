@@ -39,15 +39,18 @@ namespace Nim
             }
         }
 
-        public List<int> TopRow{
+        public IList<int> TopRow
+        {
             get { return topRow; }
         }
 
-        public List<int> MidRow{
+        public IList<int> MidRow
+        {
             get { return midRow; }
         }
 
-        public List<int> BotRow{
+        public IList<int> BotRow
+        {
             get { return botRow; }
         }
 
@@ -55,7 +58,8 @@ namespace Nim
             get { return totalStates; }
         }
 
-        public List<float> Values{
+        public IList<float> Values
+        {
             get {
                 if (values.Count < topRow.Count){
                     calcValues();

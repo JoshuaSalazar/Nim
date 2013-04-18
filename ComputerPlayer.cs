@@ -21,20 +21,20 @@ namespace Nim
                     game.stateList[i].MidRow <= game.rows[1] &&
                     game.stateList[i].BotRow <= game.rows[2])
                 {
-                    int numRowsToMove = 0;
+                    int numrowsToMove = 0;
                     if (game.stateList[i].TopRow < game.rows[0])
                     {
-                        numRowsToMove++;
+                        numrowsToMove++;
                     }
                     if (game.stateList[i].MidRow < game.rows[1])
                     {
-                        numRowsToMove++;
+                        numrowsToMove++;
                     }
                     if (game.stateList[i].BotRow < game.rows[2])
                     {
-                        numRowsToMove++;
+                        numrowsToMove++;
                     }
-                    if (numRowsToMove == 1)
+                    if (numrowsToMove == 1)
                     {
                         if (bestMove == -1)
                         {
@@ -64,15 +64,20 @@ namespace Nim
                 {
                     game.makeMove(2, botDiff);
                 }
-            }
+
+                //for (int i = 0; i < 3; i++)
+                //{
+                //    makeMove(i,
+                //}
+			}
             else
             {
                 bool hasMoved = false;
                 while (!hasMoved)
                 {
                     int randRow = rand.Next(3);
-                    int numRemoved = rand.Next(game.rows[randRow] - 1);
-                    hasMoved = game.makeMove(randRow, numRemoved + 1);
+                    int numToRemove = rand.Next(game.rows[randRow]+1);
+                    hasMoved = game.makeMove(randRow, numToRemove);
                 }
             }
             return true;
