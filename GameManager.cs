@@ -60,11 +60,7 @@ namespace Nim
 
         public bool makeMove(int row, int num)
         {
-            if (row >= rows.Length)
-            {
-                return false;
-            }
-            else if (rows[row] < num)
+            if (row >= rows.Length || rows[row] < num || num <= 0)
             {
                 return false;
             }
