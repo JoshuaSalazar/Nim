@@ -21,17 +21,15 @@ namespace Nim
         }
 
         private void initStateList(){
-            for (int t = 0; t < 4; t++)
-            {
-                for (int m = 0; m < 6; m++)
-                {
-                    for (int b = 0; b < 8; b++)
-                    {
+            for (int t = 0; t < 4; t++){
+                for (int m = 0; m < 6; m++){
+                    for (int b = 0; b < 8; b++){
                         stateList.Add(new State(t, m, b));
                     }
                 }
             }
         }
+
         public void printBoard()
         {
             Console.WriteLine("===========================");
@@ -40,6 +38,7 @@ namespace Nim
             Console.WriteLine("Row: 2 Pieces: " + rows[2]);
             Console.WriteLine("===========================");
         }
+
         public void newGame()
         {
             rows[0] = 3;
@@ -47,14 +46,13 @@ namespace Nim
             rows[2] = 7;
             game = new CurrentGame();
         }
+
         public bool gameIsOver()
         {
             if (rows[0] == 0 &&
                 rows[1] == 0 &&
                 rows[2] == 0)
             {
-                //endGame();
-                //newGame();
                 return true;
             }
             return false;
@@ -77,10 +75,12 @@ namespace Nim
             }
             return true;
         }
-        public void moveMade()
+
+        private void moveMade()
         {
             game.addState(rows[0], rows[1], rows[2]);
         }
+
         public void endGame()
         {
             for (int k = 0; k < game.TotalStates; k++)

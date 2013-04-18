@@ -8,7 +8,6 @@ namespace Nim
     public class UserInput
     {
         private GameManager game;
-        DateTime dt;
         public UserInput()
         {
             game = new GameManager();
@@ -29,10 +28,7 @@ namespace Nim
                 }
                 else if (selectMode == "2")
                 {
-                    dt = DateTime.Now;
                     ComputerVsComputer();
-                    TimeSpan ts = DateTime.Now - dt;
-                    Console.WriteLine(ts);
 
                 }
                 else
@@ -103,6 +99,8 @@ namespace Nim
 
         public void ComputerVsComputer()
         {
+            DateTime dt = DateTime.Now;
+
             ComputerPlayer cpu = new ComputerPlayer();
             Console.WriteLine("How many times do you want the Computers to play?");
             string numGames = Console.ReadLine();
@@ -117,6 +115,9 @@ namespace Nim
                 }
                 game.newGame();
             }
+
+            TimeSpan ts = DateTime.Now - dt;
+            Console.WriteLine(ts);
         }
     }
 }
