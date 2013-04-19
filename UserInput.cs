@@ -24,12 +24,10 @@ namespace Nim
                 if (selectMode == "1")
                 {
                     PlayerInput();
-
                 }
                 else if (selectMode == "2")
                 {
                     ComputerVsComputer();
-
                 }
                 else
                 {
@@ -49,7 +47,11 @@ namespace Nim
             Random randgen = new Random();
             int rand = randgen.Next(0, 2);
             bool isPlayerTurn = rand % 2 == 0;
-
+            if (isPlayerTurn){
+                Console.WriteLine("Congradulations, you get to go first!");
+            }else{
+                Console.WriteLine("Congradulations, you get to go first!");
+            }
             while (!game.gameIsOver())
             {
                 if (isPlayerTurn)
