@@ -23,13 +23,13 @@ namespace Nim
                 Console.WriteLine("How many pieces do you want to take away?");
                 string takePieces = Console.ReadLine();
                 int num = int.Parse(takePieces);
-                if (!game.makeMove(row, num))
+                if (game.makeMove(row, num))
                 {
-                    Console.WriteLine("Invalid Input, try again");
+                    moveMade = true;
                 }
                 else
                 {
-                    moveMade = true;
+                    Console.WriteLine("Invalid Input, try again");
                 }
             }
             return true;

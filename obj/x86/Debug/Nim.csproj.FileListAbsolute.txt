@@ -8,3 +8,5 @@ C:\Users\kmalmrose\Documents\GitHub\Nim\obj\x86\Debug\Nim.pdb
 C:\Users\kmalmrose\Documents\GitHub\Nim\bin\Debug\Nim.exe
 C:\Users\kmalmrose\Documents\GitHub\Nim\bin\Debug\Nim.pdb
 C:\Users\kmalmrose\Documents\GitHub\Nim\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\jsalazar\Documents\GitHub\Nim\obj\x86\Debug\Nim.exe
+C:\Users\jsalazar\Documents\GitHub\Nim\obj\x86\Debug\Nim.pdb
