@@ -79,13 +79,13 @@ namespace Nim
 
         public void endGame()
         {
-            for (int k = 0; k < game.TotalStates; k++)
+            for (int k = 0; k < game.States.Count; k++)
             {
                 for (int i = 0; i < stateList.Count; i++)
                 {
-                    if (stateList[i].TopRow == game.TopRow[k] &&
-                        stateList[i].MidRow == game.MidRow[k] &&
-                        stateList[i].BotRow == game.BotRow[k])
+                    if (stateList[i].TopRow == game.States[k].TopRow &&
+                        stateList[i].MidRow == game.States[k].MidRow &&
+                        stateList[i].BotRow == game.States[k].BotRow)
                     {
                         stateList[i].addInstance(game.Values[k]);
                     }

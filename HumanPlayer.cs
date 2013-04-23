@@ -12,7 +12,7 @@ namespace Nim
         public bool makeMove(GameManager game)
         {
             bool moveMade = false;
-            while (!moveMade)
+            do
             {
                 game.printBoard();
                 Console.WriteLine("Choose number of row");
@@ -31,7 +31,7 @@ namespace Nim
                 {
                     Console.WriteLine("Invalid Input, try again");
                 }
-            }
+            } while (!moveMade);
             return true;
         }
     }
