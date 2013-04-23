@@ -23,11 +23,9 @@ namespace Nim
         private void calcValues(){
             for (int i = 0; i < states.Count; i++){
                 if ((i - states.Count) % 2 == 0){
-                    float value = -((states.Count - (states.Count - i) % 2)) / (float)states.Count;
-                    values.Add(value);
+                    values.Add(-((states.Count - (states.Count - i) % 2)) / (float)states.Count);
                 }else{
-                    float value = ((states.Count - (states.Count - i) % 2)) / (float)states.Count;
-                    values.Add(value);
+                    values.Add(((states.Count - (states.Count - i) % 2)) / (float)states.Count);
                 }
             }
         }
