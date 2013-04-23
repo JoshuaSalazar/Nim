@@ -17,12 +17,10 @@ namespace Nim
                 game.printBoard();
                 Console.WriteLine("Choose number of row");
                 Console.WriteLine("(0) for First Row, (1) for Second Row, (2) for Third Row");
-                string rowNumber = Console.ReadLine();
-                int row = int.Parse(rowNumber);
+                int row = int.Parse(Console.ReadLine());
 
                 Console.WriteLine("How many pieces do you want to take away?");
-                string takePieces = Console.ReadLine();
-                int num = int.Parse(takePieces);
+                int num = int.Parse(Console.ReadLine());
                 if (game.makeMove(row, num))
                 {
                     moveMade = true;
