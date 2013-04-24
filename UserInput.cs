@@ -50,7 +50,7 @@ namespace Nim
             if (isPlayerTurn){
                 Console.WriteLine("Congradulations, you get to go first!");
             }else{
-                Console.WriteLine("Congradulations, you get to go first!");
+                Console.WriteLine("The computer goes first.");
             }
             while (!game.gameIsOver())
             {

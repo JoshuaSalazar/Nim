@@ -42,6 +42,7 @@ namespace Nim
                         }
                         else if (game.stateList[i].getWeight() <= game.stateList[bestMove].getWeight())
                         {
+                            Console.WriteLine("Best move: " + i + " = " + game.stateList[i].TopRow + ", " + game.stateList[i].MidRow + ", " + game.stateList[i].BotRow);
                             bestMove = i;
                         }
                     }
@@ -64,11 +65,6 @@ namespace Nim
                 {
                     game.makeMove(2, botDiff);
                 }
-
-                //for (int i = 0; i < 3; i++)
-                //{
-                //    makeMove(i,
-                //}
 			}
             else
             {
