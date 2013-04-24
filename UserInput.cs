@@ -7,10 +7,18 @@ namespace Nim
 {
     public class UserInput
     {
+        public delegate void writerDelegate(string input);
+        public writerDelegate writer;
+
+        public delegate String readerDelegate();
+        public readerDelegate readLine;
+
         private GameManager game;
-        public UserInput()
+        public UserInput(writerDelegate newWriter, readerDelegate newReader)
         {
-            game = new GameManager();
+            writer = new writerDelegate(newWriter);
+            readLine = new readerDelegate(newReader);
+            game = new GameManager(writer);
         }
 
         public bool Begin()
@@ -18,8 +26,8 @@ namespace Nim
             bool quit = false;
             do
             {
-                Console.WriteLine("Choose:  (1) for Player vs Computer or (2) for Computer vs Computer");
-                string selectMode = Console.ReadLine();
+                writer("Choose:  (1) for Player vs Computer or (2) for Computer vs Computer");
+                string selectMode = readLine();
 
                 if (selectMode == "1")
                 {
@@ -41,16 +49,16 @@ namespace Nim
 
         public void PlayerInput()
         {
-            HumanPlayer p1 = new HumanPlayer();
+            HumanPlayer p1 = new HumanPlayer(writer, readLine);
             ComputerPlayer p2 = new ComputerPlayer();
             game.newGame();
             Random randgen = new Random();
             int rand = randgen.Next(0, 2);
             bool isPlayerTurn = rand % 2 == 0;
             if (isPlayerTurn){
-                Console.WriteLine("Congradulations, you get to go first!");
+                writer("Congradulations, you get to go first!");
             }else{
-                Console.WriteLine("The computer goes first.");
+                writer("The computer goes first.");
             }
             while (!game.gameIsOver())
             {
@@ -65,11 +73,11 @@ namespace Nim
                 isPlayerTurn = !isPlayerTurn;
                 if (game.gameIsOver() && isPlayerTurn)
                 {
-                    Console.WriteLine("You win!");
+                    writer("You win!");
                 }
                 else if (game.gameIsOver())
                 {
-                    Console.WriteLine("You lose");
+                    writer("You lose");
                 }
             }
         }
@@ -80,17 +88,17 @@ namespace Nim
             while (!moveMade)
             {
                 game.printBoard();
-                Console.WriteLine("Choose number of row");
-                Console.WriteLine("(0) for First Row, (1) for Second Row, (2) for Third Row");
-                string rowNumber = Console.ReadLine();
+                writer("Choose number of row");
+                writer("(0) for First Row, (1) for Second Row, (2) for Third Row");
+                string rowNumber = readLine();
                 int row = int.Parse(rowNumber);
 
-                Console.WriteLine("How many pieces do you want to take away?");
-                string takePieces = Console.ReadLine();
+                writer("How many pieces do you want to take away?");
+                string takePieces = readLine();
                 int num = int.Parse(takePieces);
                 if (!game.makeMove(row, num))
                 {
-                    Console.WriteLine("Invalid Input, try again");
+                    writer("Invalid Input, try again");
                 }
                 else
                 {
@@ -104,8 +112,8 @@ namespace Nim
             DateTime dt = DateTime.Now;
 
             ComputerPlayer cpu = new ComputerPlayer();
-            Console.WriteLine("How many times do you want the Computers to play?");
-            string numGames = Console.ReadLine();
+            writer("How many times do you want the Computers to play?");
+            string numGames = readLine();
 
             int num = int.Parse(numGames);
             game.newGame();
@@ -119,7 +127,7 @@ namespace Nim
             }
 
             TimeSpan ts = DateTime.Now - dt;
-            Console.WriteLine(ts);
+            writer(ts.ToString());
         }
     }
 }

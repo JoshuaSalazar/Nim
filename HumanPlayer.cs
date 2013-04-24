@@ -7,7 +7,11 @@ namespace Nim
 {
     class HumanPlayer : IPlayer
     {
-        public HumanPlayer(){
+        public UserInput.writerDelegate writer;
+        public UserInput.readerDelegate readLine;
+        public HumanPlayer(UserInput.writerDelegate newWriter, UserInput.readerDelegate newReader){
+            writer = newWriter;
+            readLine = newReader;
         }
         public bool makeMove(GameManager game)
         {
@@ -15,19 +19,19 @@ namespace Nim
             do
             {
                 game.printBoard();
-                Console.WriteLine("Choose number of row");
-                Console.WriteLine("(0) for First Row, (1) for Second Row, (2) for Third Row");
-                int row = int.Parse(Console.ReadLine());
+                writer("Choose number of row");
+                writer("(0) for First Row, (1) for Second Row, (2) for Third Row");
+                int row = int.Parse(readLine());
 
-                Console.WriteLine("How many pieces do you want to take away?");
-                int num = int.Parse(Console.ReadLine());
+                writer("How many pieces do you want to take away?");
+                int num = int.Parse(readLine());
                 if (game.makeMove(row, num))
                 {
                     moveMade = true;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Input, try again");
+                    writer("Invalid Input, try again");
                 }
             } while (!moveMade);
             return true;

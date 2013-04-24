@@ -11,12 +11,14 @@ namespace Nim
         public int[] rows;
         private CurrentGame game;
         private Random rand;
+        public UserInput.writerDelegate writer;
 
-        public GameManager(){
+        public GameManager(UserInput.writerDelegate writer){
             rows = new int[3];
             rand = new Random();
             game = new CurrentGame();
             stateList = new List<State>();
+            writer = new UserInput.writerDelegate(writer);
             initStateList();
         }
 
@@ -32,11 +34,11 @@ namespace Nim
 
         public void printBoard()
         {
-            Console.WriteLine("===========================");
-            Console.WriteLine("Row: 0 Pieces: " + rows[0]);
-            Console.WriteLine("Row: 1 Pieces: " + rows[1]);
-            Console.WriteLine("Row: 2 Pieces: " + rows[2]);
-            Console.WriteLine("===========================");
+            writer("===========================");
+            writer("Row: 0 Pieces: " + rows[0]);
+            writer("Row: 1 Pieces: " + rows[1]);
+            writer("Row: 2 Pieces: " + rows[2]);
+            writer("===========================");
         }
 
         public void newGame()

@@ -42,7 +42,6 @@ namespace Nim
                         }
                         else if (game.stateList[i].getWeight() <= game.stateList[bestMove].getWeight())
                         {
-                            Console.WriteLine("Best move: " + i + " = " + game.stateList[i].TopRow + ", " + game.stateList[i].MidRow + ", " + game.stateList[i].BotRow);
                             bestMove = i;
                         }
                     }
