@@ -15,22 +15,20 @@ namespace Nim
         public bool makeMove(GameManager game)
         {
             int bestMove = -1;
-            for (int i = 0; i < game.stateList.Count; i++)
+            for (int numState = 0; numState < game.stateList.Count; numState++)
             {
-                if (game.stateList[i].TopRow <= game.rows[0] &&
-                    game.stateList[i].MidRow <= game.rows[1] &&
-                    game.stateList[i].BotRow <= game.rows[2])
+                if (validMove(game, numState))
                 {
                     int numrowsToMove = 0;
-                    if (game.stateList[i].TopRow < game.rows[0])
+                    if (game.stateList[numState].TopRow < game.rows[0])
                     {
                         numrowsToMove++;
                     }
-                    if (game.stateList[i].MidRow < game.rows[1])
+                    if (game.stateList[numState].MidRow < game.rows[1])
                     {
                         numrowsToMove++;
                     }
-                    if (game.stateList[i].BotRow < game.rows[2])
+                    if (game.stateList[numState].BotRow < game.rows[2])
                     {
                         numrowsToMove++;
                     }
@@ -38,11 +36,11 @@ namespace Nim
                     {
                         if (bestMove == -1)
                         {
-                            bestMove = i;
+                            bestMove = numState;
                         }
-                        else if (game.stateList[i].getWeight() <= game.stateList[bestMove].getWeight())
+                        else if (game.stateList[numState].getWeight() <= game.stateList[bestMove].getWeight())
                         {
-                            bestMove = i;
+                            bestMove = numState;
                         }
                     }
                 }
@@ -77,5 +75,13 @@ namespace Nim
             }
             return true;
         }
+
+        public bool validMove(GameManager game, int numState)
+        {
+            return (game.stateList[numState].TopRow <= game.rows[0] &&
+                    game.stateList[numState].MidRow <= game.rows[1] &&
+                    game.stateList[numState].BotRow <= game.rows[2]);
+        }
+
     }
 }

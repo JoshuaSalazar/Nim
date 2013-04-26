@@ -62,7 +62,7 @@ namespace Nim
 
         public bool makeMove(int row, int num)
         {
-            if (row >= rows.Length || rows[row] < num || num <= 0)
+            if (noPossibleMove(row, num))
             {
                 return false;
             }
@@ -85,14 +85,26 @@ namespace Nim
             {
                 for (int i = 0; i < stateList.Count; i++)
                 {
-                    if (stateList[i].TopRow == game.States[k].TopRow &&
-                        stateList[i].MidRow == game.States[k].MidRow &&
-                        stateList[i].BotRow == game.States[k].BotRow)
+                    if (statesEqualGame(i, k))
                     {
                         stateList[i].addInstance(game.Values[k]);
                     }
                 }
             }
         }
+
+        public bool statesEqualGame(int statesLists, int gameRows)
+        {
+            return (stateList[statesLists].TopRow == game.States[gameRows].TopRow &&
+                        stateList[statesLists].MidRow == game.States[gameRows].MidRow &&
+                        stateList[statesLists].BotRow == game.States[gameRows].BotRow);
+        }
+
+        public bool noPossibleMove(int row, int num)
+        {
+            return (row >= rows.Length || rows[row] < num || num <= 0);
+        }
+
+
     }
 }

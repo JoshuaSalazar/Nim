@@ -49,8 +49,8 @@ namespace Nim
 
         public void PlayerInput()
         {
-            HumanPlayer p1 = new HumanPlayer(writer, readLine);
-            ComputerPlayer p2 = new ComputerPlayer();
+            HumanPlayer player1 = new HumanPlayer(writer, readLine);
+            ComputerPlayer computerPlayer = new ComputerPlayer();
             game.newGame();
             Random randgen = new Random();
             int rand = randgen.Next(0, 2);
@@ -64,11 +64,11 @@ namespace Nim
             {
                 if (isPlayerTurn)
                 {
-                    p1.makeMove(game);
+                    player1.makeMove(game);
                 }
                 else
                 {
-                    p2.makeMove(game);
+                    computerPlayer.makeMove(game);
                 }
                 isPlayerTurn = !isPlayerTurn;
                 if (game.gameIsOver() && isPlayerTurn)
