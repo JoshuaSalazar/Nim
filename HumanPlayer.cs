@@ -40,6 +40,9 @@ namespace Nim
             do{
                 writer(prompt);
                 int.TryParse(readLine(), out userInput);
+                if (!success){
+                    writer("That's not a number, try again.");
+                }
             }while (!success);
             return userInput;
         }
