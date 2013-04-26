@@ -22,10 +22,11 @@ namespace Nim
 
         private void calcValues(){
             for (int i = 0; i < states.Count; i++){
+                float weight = ((states.Count - (states.Count - i) % 2)) / (float)states.Count;
                 if ((i - states.Count) % 2 == 0){
-                    values.Add(-((states.Count - (states.Count - i) % 2)) / (float)states.Count);
+                    values.Add(-weight);
                 }else{
-                    values.Add(((states.Count - (states.Count - i) % 2)) / (float)states.Count);
+                    values.Add(weight);
                 }
             }
         }

@@ -13,12 +13,12 @@ namespace Nim
         private Random rand;
         public UserInput.writerDelegate writer;
 
-        public GameManager(UserInput.writerDelegate writer){
+        public GameManager(UserInput.writerDelegate newWriter){
             rows = new int[3];
             rand = new Random();
             game = new CurrentGame();
             stateList = new List<State>();
-            writer = new UserInput.writerDelegate(writer);
+            writer = newWriter;
             initStateList();
         }
 
