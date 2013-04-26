@@ -20,11 +20,8 @@ namespace Nim
             {
                 game.printBoard();
                 writer("Choose number of row");
-                writer("(0) for First Row, (1) for Second Row, (2) for Third Row");
-                int row = int.Parse(readLine());
-
-                writer("How many pieces do you want to take away?");
-                int num = int.Parse(readLine());
+                int row = promptForInt("(0) for First Row, (1) for Second Row, (2) for Third Row");
+                int num = promptForInt("How many pieces do you want to take away?");
                 if (game.makeMove(row, num))
                 {
                     moveMade = true;
@@ -35,6 +32,19 @@ namespace Nim
                 }
             } while (!moveMade);
             return true;
+        }
+        private int promptForInt(String prompt)
+        {
+            bool success = false;
+            int userInput = 0;
+            do{
+                writer(prompt);
+                int.TryParse(readLine(), out userInput);
+                if (!success){
+                    writer("That's not a number, try again.");
+                }
+            }while (!success);
+            return userInput;
         }
     }
 }

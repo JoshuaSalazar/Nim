@@ -12,7 +12,6 @@ namespace Nim
 
         public CurrentGame(){
             values = new List<float>();
-
             states = new List<State>();
         }
 
