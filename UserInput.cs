@@ -80,6 +80,7 @@ namespace Nim
                     writer("You lose");
                 }
             }
+            game.endGame();
         }
 
         private void playerTurn()
@@ -123,9 +124,9 @@ namespace Nim
                 {
                     cpu.makeMove(game);
                 }
+                game.endGame();
                 game.newGame();
             }
-
             TimeSpan ts = DateTime.Now - dt;
             writer(ts.ToString());
         }
