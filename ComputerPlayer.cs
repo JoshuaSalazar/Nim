@@ -19,32 +19,16 @@ namespace Nim
             {
                 if (validMove(game, numState))
                 {
-                    int numrowsToMove = 0;
-                    if (game.stateList[numState].TopRow < game.rows[0])
+                    if (numRowsToMove(game, numState) == 1)
                     {
-                        numrowsToMove++;
-                    }
-                    if (game.stateList[numState].MidRow < game.rows[1])
-                    {
-                        numrowsToMove++;
-                    }
-                    if (game.stateList[numState].BotRow < game.rows[2])
-                    {
-                        numrowsToMove++;
-                    }
-                    if (numrowsToMove == 1)
-                    {
-                        if (bestMove == -1)
-                        {
-                            bestMove = numState;
-                        }
-                        else if (game.stateList[numState].getWeight() <= game.stateList[bestMove].getWeight())
+                        if (isBestMove(game, numState, bestMove))
                         {
                             bestMove = numState;
                         }
                     }
                 }
             }
+
             if (bestMove != -1 && game.stateList.Count > 0)
             {
                 int topDiff = game.rows[0] - game.stateList[bestMove].TopRow;
@@ -76,12 +60,34 @@ namespace Nim
             return true;
         }
 
-        public bool validMove(GameManager game, int numState)
+        private bool validMove(GameManager game, int numState)
         {
             return (game.stateList[numState].TopRow <= game.rows[0] &&
                     game.stateList[numState].MidRow <= game.rows[1] &&
                     game.stateList[numState].BotRow <= game.rows[2]);
         }
 
+        private bool isBestMove(GameManager game, int numState, int bestMove)
+        {
+            return (bestMove == -1 || game.stateList[numState].getWeight() <= game.stateList[bestMove].getWeight());
+        }
+
+        private int numRowsToMove(GameManager game, int numState)
+        {
+            int numrowsToMove = 0;
+            if (game.stateList[numState].TopRow < game.rows[0])
+            {
+                numrowsToMove++;
+            }
+            if (game.stateList[numState].MidRow < game.rows[1])
+            {
+                numrowsToMove++;
+            }
+            if (game.stateList[numState].BotRow < game.rows[2])
+            {
+                numrowsToMove++;
+            }
+            return numrowsToMove;
+        }
     }
 }
